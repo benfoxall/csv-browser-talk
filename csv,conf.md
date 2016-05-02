@@ -201,7 +201,6 @@ done < urls.txt
 
 * Accessible
 * Data stored locally
-* Available instantly
 
 
 —
@@ -391,7 +390,7 @@ Different example, maybe many items per page
 
 —
 
-## Blobb
+## Blob
 
 ```js
 const csvForUser = (token) => 
@@ -404,7 +403,7 @@ const csvForUser = (token) =>
 
 —
 
-## Blobbb
+## Blob
 
 ```js
 csvForUser(token)
@@ -415,7 +414,7 @@ csvForUser(token)
 
 —
 
-## Blobbbb
+## Blob
 
 ```js
 csvForUser(token)
@@ -434,6 +433,14 @@ csvForUser(token)
 
 ^
 this will be really useful to people
+
+—
+
+## …
+
+```
+
+```
 
 —
 
@@ -480,7 +487,15 @@ db.activities
 
 —-
 
-## …losing urls
+## …
+
+```
+
+```
+
+—-
+
+## …no urls
 
 > The `URL.createObjectURL()` static method creates a DOMString containing an URL representing the object given in parameter. The URL **lifetime is tied to the document in the window** on which it was created. The new object URL represents the specified File object or Blob object.
 
@@ -527,7 +542,7 @@ new Response(blob, {ContentType: 'text/csv'})
 
 —
 
-## Win
+## 👌
 
 ```js
 self.addEventListener('fetch', event =>  {
@@ -544,13 +559,30 @@ self.addEventListener('fetch', event =>  {
     if(event.request.url.match(/data\/geo\.json$/))
       respond(event, geoJSONResponse)
 
-    if(event.request.url.match(/data\/geo\.simple\.json$/))
-      respond(event, geoJSONResponseSimple)
-
-    if(event.request.url.match(/data\/binary\.path\.b$/))
-      respond(event, binaryPathResponse)
+    //…
 
 })
+```
+
+—
+
+## 👌
+
+```js
+event.respondWith(
+  cache(responder)
+)
+```
+
+—
+
+
+## 👌
+
+```js
+fetch('/data/foo.json')
+d3.csv('/data/foo.csv')
+$.get('/data/foo.html')
 ```
 
 —
