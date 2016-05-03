@@ -2,7 +2,7 @@
 
 ### [fit] Ben Foxall,@benjaminbenben,@pusher
 
-![inline 20%](img/pusher_logo_p_white.png)
+![inline 30%](img/pusher_logo_p_dark.png)
 
 ^
 I like being first. I like the idea that if I'd got everything wrong, like I don't even know what csv *is* - then I'm fine for half an hour.
@@ -170,7 +170,6 @@ done < urls.txt
 
 * Non-trivial backend
 * Handling sensitive data
-* Processing queues
 * Online only
 
 ---
@@ -180,7 +179,7 @@ done < urls.txt
 ---
 
 # Attempt 4
-## Go client-side
+## Serve from the browser
 
 —
 
@@ -204,6 +203,12 @@ done < urls.txt
 
 
 —
+
+# ❌
+
+* …
+
+---
 
 ### What we’ll implement in the browser:
 
@@ -306,13 +311,13 @@ the just strips out “
 —
 
 ```js
-const keys = ['distance', 'climb', '…']
+const columns = ['distance', 'climb', '…']
 
 const csvForUser = (token) => 
   dataForUser(token)
     .then(pages => 
       pages.map(page => 
-        csv(row(keys, page))
+        csv(row(columns , page))
       ).join('\n')
     )
 ```
@@ -357,6 +362,14 @@ csvForUser(token)
 
 —
 
+## …
+
+```
+
+```
+
+—
+
 ## … supporting bigger files
 
 ```js
@@ -383,6 +396,7 @@ const csvForUser = (token) =>
       pages.map(page => 
         page.items.map(to_csv).join('')
       ).join('\n')
+    )
 ```
 
 ^
@@ -444,7 +458,7 @@ this will be really useful to people
 
 —
 
-## …losing data
+## …no persistance
 
 ```js
 
@@ -456,7 +470,7 @@ this will be really useful to people
 
 —
 
-## IndexedDB (with Dexie)
+## IndexedDB _(+Dexie)_
 
 ```js
 const db = new Dexie('Runkeeper')
@@ -473,7 +487,11 @@ fetch(uri)
 
 —
 
-## IndexedDB (with Dexie)
+![fit](img/db-view.png)
+
+—
+
+## IndexedDB _(+Dexie)_
 
 ```
 db.activities
@@ -545,6 +563,16 @@ new Response(blob, {ContentType: 'text/csv'})
 ## 👌
 
 ```js
+event.respondWith(
+  cache(responder)
+)
+```
+
+—
+
+## 👌
+
+```js
 self.addEventListener('fetch', event =>  {
 
     if(event.request.url.match(/data\/summary\.csv$/))
@@ -569,21 +597,16 @@ self.addEventListener('fetch', event =>  {
 ## 👌
 
 ```js
-event.respondWith(
-  cache(responder)
-)
-```
-
-—
-
-
-## 👌
-
-```js
 fetch('/data/foo.json')
 d3.csv('/data/foo.csv')
 $.get('/data/foo.html')
 ```
+
+—
+
+## 👌
+
+>> Offline
 
 —
 
@@ -593,13 +616,33 @@ $.get('/data/foo.html')
 
 ![fit](img/rk-data.png)
 
+
+---
+
+# Things I really like about this:
+
+* Accessibility - data for everyone
+* It's the start of something, not the end
+
+^ 
+* Using a web browser lowers the barrier of entry
+* using SW as an abstraction means that people can bring their own code
+
+—-
+
+### 🔗
+
+> [github/benfoxall/runkeeper-data](https://github.com/benfoxall/runkeeper-data)
+> [runkeeper-data.herokuapp.com](https://runkeeper-data.herokuapp.com/)
+
 —
 
-# Danke schön
+# Dankeschön
 
 ## @benjaminbenben
 
 ### Developer Relations at @pusher
 
 
+#### <sub>_slides: [github/benfoxall/csv-browser-talk](https://github.com/benfoxall/csv-browser-talk)_</sub>
 #### <sub>_Network + Browser icons: YuguDesign & Fritz - [Noun Project](https://thenounproject.com)_</sub>
